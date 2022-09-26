@@ -35,4 +35,13 @@ public class PartsResource {
         return new ResponseEntity(partsOfCarDtos, HttpStatus.OK);
     }
 
+    @PutMapping("/parts-of-car/update")
+    public ResponseEntity<PartsOfCarDto> update(@RequestBody PartsOfCarDto partsOfCarDto) {
+        return new ResponseEntity(partsService.update(partsOfCarDto),HttpStatus.OK);
+    }
+    @DeleteMapping("/parts-of-car/delete/{id}")
+    public void delete(@PathVariable(name = "id") Long id){
+        partsService.delete(id);
+    }
+
 }

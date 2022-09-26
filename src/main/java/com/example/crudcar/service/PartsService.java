@@ -35,4 +35,15 @@ public class PartsService {
         return partsMapper.toDto(partsOfCars);
     }
 
+    public PartsOfCarDto update(PartsOfCarDto partsOfCarDto) {
+        partsRepository.findById(partsOfCarDto.getCarId()).orElseThrow(() -> new IllegalStateException("Car with id = " +partsOfCarDto.getId() +"dose not exist"));
+        PartsOfCar partsOfCar = partsMapper.toEntity(partsOfCarDto);
+        return partsMapper.toDto(partsRepository.save(partsOfCar));
+    }
+
+    public void delete(Long id){
+        partsRepository.findById(id).orElseThrow(() -> new IllegalStateException("Car with id = " + id +"dose not exist"));
+        partsRepository.deleteById(id);
+    }
+
 }
